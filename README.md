@@ -1,4 +1,4 @@
-# 🌊 WavAgent — Real-Time Decision Intelligence Engine
+# WavAgent — Real-Time Decision Intelligence Engine
 
 **Microsoft Build AI Hackathon 2026 — Theme: Agent Swarms**
 
@@ -6,13 +6,13 @@ WavAgent is a multi-agent intelligence platform that deploys a swarm of speciali
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Researching a topic today means manually checking news sites, Reddit, Wikipedia, and search engines, then mentally synthesizing it all into "what does this mean and what should I do about it?" WavAgent automates this entire pipeline with a coordinated swarm of AI agents — and shows you the swarm working, live, instead of hiding it behind a spinner.
 
 ---
 
-## 🏗️ Architecture — Agent Swarm
+## Architecture — Agent Swarm
 
 WavAgent uses **6 specialized agents** orchestrated adaptively based on query type:
 
@@ -76,7 +76,7 @@ A lightweight regex-based intent filter detects casual greetings ("hi", "how are
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 - **Live agent swarm visualization** — every one of the 60+ agent steps streams to the UI in real time via Server-Sent Events, so judges (and users) see exactly what's happening
 - **AI-powered intelligence summaries** — Phi-4-mini-instruct (Azure AI Foundry) writes fluent 2-3 sentence briefings from raw headlines
@@ -90,7 +90,7 @@ A lightweight regex-based intent filter detects casual greetings ("hi", "how are
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -104,7 +104,7 @@ A lightweight regex-based intent filter detects casual greetings ("hi", "how are
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Python 3.11+
@@ -148,7 +148,7 @@ Try a greeting too: `hi`, `how are you` — WavAgent responds directly without d
 
 ---
 
-## 🤖 AI Tools Used (Disclosure)
+## AI Tools Used (Disclosure)
 
 As required by the hackathon rules, this project was built using the following AI-assisted tools:
 
@@ -164,7 +164,7 @@ All core agent logic, orchestration design, risk-scoring algorithms, UI/UX, and 
 
 ---
 
-## 🔐 Data Privacy & Handling
+## Data Privacy & Handling
 
 - **No user data is collected or stored.** Each query is processed in-memory and discarded after the response is returned.
 - **No personal, sensitive, or proprietary data** is used — all data sources are public (RSS feeds, public Reddit posts, Wikipedia, public web search results).
@@ -173,7 +173,7 @@ All core agent logic, orchestration design, risk-scoring algorithms, UI/UX, and 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 WavAgent/
@@ -200,18 +200,7 @@ WavAgent/
 ```
 
 ---
-
-## 👥 Team
-
-| Name | Role |
-|---|---|
-| _[Your Name]_ | _[e.g. Full-stack development, agent architecture]_ |
-| _[Team Member 2]_ | _[Role]_ |
-| _[Team Member 3]_ | _[Role]_ |
-
----
-
-## 📜 License & Open Source Credits
+## License & Open Source Credits
 
 This project uses the following open-source libraries (see `requirements.txt` for full list):
 - FastAPI, Uvicorn — web framework
