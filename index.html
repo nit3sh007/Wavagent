@@ -452,6 +452,7 @@ body::before {
       <span id="typeBadge" class="type-badge"></span>
     </div>
     <button id="deployBtn" class="deploy-btn" onclick="startResearch()">
+      <span id="btnIcon">⚡</span>
       <span id="btnText">Deploy Agents</span>
     </button>
   </div>
@@ -527,6 +528,7 @@ const QUERY_TYPES = {
 };
 
 let stepCount = 0, agentSet = new Set(), startTime = null, timer = null;
+let currentController = null;
 
 function esc(s) {
   return String(s)
@@ -830,6 +832,12 @@ async function startResearch() {
     return;
   }
 
+  // Cancel any in-flight search before starting a new one
+  if (currentController) {
+    currentController.abort();
+  }
+  currentController = new AbortController();
+  const signal = currentController.signal;
 
   stepCount = 0; agentSet.clear(); startTime = Date.now();
   document.getElementById('termBody').innerHTML = '';
@@ -850,7 +858,8 @@ async function startResearch() {
     const res = await fetch(`${API}/api/agent/stream`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query}),
+      body: JSON.stringify({ query }),
+      signal,
     });
 
     const reader = res.body.getReader();
@@ -887,6 +896,10 @@ async function startResearch() {
       }
     }
   } catch (err) {
+    if (err.name === 'AbortError') {
+      // Silent — user started a new search or left the page
+      return;
+    }
     addStep(null, `Connection failed: ${err.message}`, 'error');
     document.getElementById('answerPanel').innerHTML = `<div class="error-card">❌ Cannot connect to WavAgent API. Is the server running on port 8000?</div>`;
   } finally {
@@ -900,6 +913,13 @@ document.getElementById('answerPanel').addEventListener('click', (e) => {
   const item = e.target.closest('[data-query]');
   if (item && item.dataset.query) {
     quickQuery(item.dataset.query);
+  }
+});
+
+// Cancel in-flight search when page is closed/refreshed
+window.addEventListener('beforeunload', () => {
+  if (currentController) {
+    currentController.abort();
   }
 });
 </script>
