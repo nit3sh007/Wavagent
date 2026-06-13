@@ -9,7 +9,6 @@ import os
 from datetime import datetime
 
 from agent.agent import run_geo_agent
-from translator.translate import translate_report
 
 app = FastAPI(
     title="WavAgent API",
@@ -107,12 +106,6 @@ async def get_country_intelligence(request: IntelligenceRequest):
             raise HTTPException(status_code=500, detail=result.get("error", "Agent failed"))
 
         report = result["data"]
-
-        if language != "en":
-            try:
-                report = translate_report(report, language)
-            except Exception:
-                pass
 
         report["generated_at"] = datetime.now().isoformat()
         report["country"] = country
